@@ -1,0 +1,40 @@
+name: Validate Skills
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate skill files exist
+        run: |
+          echo "Validating skill definitions..."
+          for dir in skills/*/; do
+            skill_name=$(basename "$dir")
+            if [ ! -f "$dir/skill.md" ]; then
+              echo "MISSING: $dir/skill.md"
+              exit 1
+            fi
+            # Check skill.md has content
+            if [ ! -s "$dir/skill.md" ]; then
+              echo "EMPTY: $dir/skill.md"
+              exit 1
+            fi
+            echo "OK: $skill_name"
+          done
+          echo "All skills validated."
+
+      - name: Count skills
+        run: |
+          count=$(find skills -name "skill.md" | wc -l | tr -d ' ')
+          echo "Total skills: $count"
