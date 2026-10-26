@@ -1,3 +1,8 @@
+---
+name: test-generator
+description: Generates unit tests for source files changed on the current branch, following the project's existing test framework and patterns (Vitest, Jest, JUnit, TestNG, NUnit, pytest). Use when the user asks for tests for their changes.
+---
+
 # AI Test Generator
 
 Generate comprehensive tests for code changes in the current branch.
@@ -32,3 +37,10 @@ Generate comprehensive tests for code changes in the current branch.
 - Mock external services — never make real API calls in unit tests
 - Each test should have a descriptive name that explains what it verifies
 - Aim for one assertion per test when possible
+
+## Output
+
+1. The new or updated test files, written next to the project's existing tests
+2. A summary table: source file → test file → number of tests → cases covered
+3. The test command that was run and its result (pass/fail counts)
+4. Any code that could not be tested, and why

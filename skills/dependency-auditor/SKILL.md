@@ -1,3 +1,8 @@
+---
+name: dependency-auditor
+description: Audits project dependencies for known vulnerabilities, outdated packages and license issues. Use when the user asks about dependency security, upgrades or licenses.
+---
+
 # Dependency Auditor
 
 Audit project dependencies for security vulnerabilities, outdated packages, and license compliance.

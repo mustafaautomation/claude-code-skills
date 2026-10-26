@@ -1,3 +1,8 @@
+---
+name: doc-writer
+description: Generates API documentation (OpenAPI or Markdown) from the project's source code. Use when the user asks to document an API or its endpoints.
+---
+
 # API Documentation Writer
 
 Generate comprehensive API documentation from source code.

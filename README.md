@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Skills-FF6B35.svg)](https://docs.anthropic.com/en/docs/claude-code)
 
-Collection of custom Claude Code skills for code review, test generation, documentation, migrations, dependency audits and SQL help. Each skill is a Markdown instruction file under `skills/`.
+Collection of custom Claude Code skills for code review, test generation, documentation, migrations, dependency audits and SQL help. Each skill is a directory under `skills/` containing a `SKILL.md` file in the [Claude Code skill format](https://code.claude.com/docs/en/skills): YAML frontmatter with `name` and `description`, followed by Markdown instructions. Claude Code can load a skill automatically when the request matches its description, or you can run it with `/skill-name`.
 
 ---
 
@@ -25,17 +25,21 @@ Collection of custom Claude Code skills for code review, test generation, docume
 
 ## Quick Install
 
+Personal skills live in `~/.claude/skills/<skill-name>/SKILL.md` and project skills in `.claude/skills/<skill-name>/SKILL.md`.
+
 ```bash
 git clone https://github.com/mustafaautomation/claude-code-skills.git
-ln -s $(pwd)/claude-code-skills/skills ~/.claude/skills
+
+# All skills, for every project (copies the skill folders)
+mkdir -p ~/.claude/skills
+cp -r claude-code-skills/skills/* ~/.claude/skills/
+
+# Or one skill, for a single repository
+mkdir -p .claude/skills
+cp -r claude-code-skills/skills/pr-reviewer .claude/skills/
 ```
 
-Or copy individual skills:
-```bash
-cp -r claude-code-skills/skills/pr-reviewer ~/.claude/skills/
-```
-
-See [INSTALL.md](INSTALL.md) for all options.
+Then start `claude` and type `/pr-reviewer` (or ask for a review and let Claude pick the skill). See [INSTALL.md](INSTALL.md) for symlinking instead of copying.
 
 ---
 
@@ -90,22 +94,22 @@ Reads your schema (Prisma, Drizzle, TypeORM, Django, Rails) and helps:
 claude-code-skills/
 ├── skills/
 │   ├── pr-reviewer/
-│   │   └── skill.md              # Code review with severity + fix suggestions
+│   │   └── SKILL.md              # Code review with severity + fix suggestions
 │   ├── test-generator/
-│   │   └── skill.md              # Multi-framework test generation
+│   │   └── SKILL.md              # Multi-framework test generation
 │   ├── doc-writer/
-│   │   └── skill.md              # API documentation (OpenAPI/Markdown)
+│   │   └── SKILL.md              # API documentation (OpenAPI/Markdown)
 │   ├── migration-assistant/
-│   │   └── skill.md              # Framework/language migration helper
+│   │   └── SKILL.md              # Framework/language migration helper
 │   ├── dependency-auditor/
-│   │   └── skill.md              # Security audit + license check
+│   │   └── SKILL.md              # Security audit + license check
 │   ├── db-query-helper/
-│   │   └── skill.md              # SQL write/optimize/explain
+│   │   └── SKILL.md              # SQL write/optimize/explain
 │   ├── api-contract-checker/
-│   │   └── skill.md              # Code routes vs OpenAPI/Swagger spec
+│   │   └── SKILL.md              # Code routes vs OpenAPI/Swagger spec
 │   └── ci-failure-analyzer/
-│       └── skill.md              # Failing GitHub Actions log analysis
-├── scripts/validate.sh            # Structural checks run by CI
+│       └── SKILL.md              # Failing GitHub Actions log analysis
+├── scripts/validate.sh            # Format checks run by CI (fails on any error)
 ├── INSTALL.md                     # Installation guide
 └── .github/workflows/validate.yml # CI: runs scripts/validate.sh
 ```
@@ -125,7 +129,13 @@ Skills encode **organizational knowledge** so every developer on the team gets t
 
 ## Validation
 
-CI runs `scripts/validate.sh`, a structural check only: each skill folder must contain a non-empty `skill.md`. Missing title, `## Process` or `## Output` sections, or files under 200 characters, are printed as warnings and do not fail the build. It does not test the skills' behaviour inside Claude Code.
+CI runs `scripts/validate.sh` on every push and pull request. The build fails if any skill:
+- has no `SKILL.md` (a lowercase `skill.md` is rejected)
+- doesn't start with YAML frontmatter, or the frontmatter isn't closed
+- is missing `name` or `description`, or its `name` isn't lowercase-hyphenated or doesn't match the folder name
+- is missing a `# Title`, a `## Process` section or a `## Output` section, or has a body under 200 characters
+
+Run it locally with `bash scripts/validate.sh` (or `bash scripts/validate.sh path/to/skills`). It checks format only; it does not test how the skills behave in Claude Code.
 
 ---
 

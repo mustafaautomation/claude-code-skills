@@ -1,3 +1,8 @@
+---
+name: ci-failure-analyzer
+description: Reads failing GitHub Actions logs, identifies the likely cause and suggests a fix. Use when a CI run or pipeline has failed.
+---
+
 # CI Failure Analyzer
 
 Analyze failing CI pipelines, identify root causes, and suggest fixes — without manual log reading.

@@ -1,3 +1,8 @@
+---
+name: api-contract-checker
+description: Compares the API routes implemented in code with the project's OpenAPI/Swagger spec and reports mismatches and breaking changes. Use when the user asks whether the API matches its spec.
+---
+
 # API Contract Checker
 
 Verify API endpoints match their OpenAPI/Swagger specification. Detect breaking changes before they reach production.
