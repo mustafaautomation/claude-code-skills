@@ -1,3 +1,8 @@
+---
+name: db-query-helper
+description: Writes, optimizes, explains and debugs SQL or ORM queries based on the project's actual schema (Prisma, Drizzle, TypeORM, Django, Rails, SQL migrations). Use when the user needs help with a database query.
+---
+
 # Database Query Helper
 
 Help write, optimize, and explain SQL queries by reading the project's schema.
@@ -38,3 +43,11 @@ When asked to optimize a query:
 - Read the actual schema before writing queries — don't assume table/column names
 - Respect the project's ORM — suggest Prisma/Drizzle queries when appropriate, not just raw SQL
 - Always warn about potentially destructive operations (DELETE, UPDATE without WHERE)
+
+## Output
+
+For each request, reply with:
+1. **Query**: the SQL (or ORM query) in a code block, parameterized
+2. **Explanation**: what it does, in plain English
+3. **Performance notes**: indexes used or suggested, and expected scan behaviour
+4. **Warnings**: any destructive or risky operation, called out explicitly

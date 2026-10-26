@@ -1,3 +1,8 @@
+---
+name: pr-reviewer
+description: Reviews the current branch's diff against main for bugs, security issues, performance problems and missing error handling, with a suggested fix for each finding. Use when the user asks for a code or PR review.
+---
+
 # AI PR Reviewer
 
 Review the current branch's changes against the base branch with enterprise-grade analysis.

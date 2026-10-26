@@ -1,3 +1,8 @@
+---
+name: migration-assistant
+description: Plans and carries out incremental code migrations such as JavaScript to TypeScript, Jest to Vitest, CommonJS to ESM or Webpack to Vite, running tests after each step. Use when the user wants to migrate a framework, language or major version.
+---
+
 # Migration Assistant
 
 Help migrate codebases between frameworks, languages, or major versions.
@@ -35,3 +40,10 @@ Help migrate codebases between frameworks, languages, or major versions.
 - Preserve git history — don't delete and recreate files
 - Keep both old and new patterns working during transition when possible
 - Document any manual steps needed (e.g., "update your IDE TypeScript version")
+
+## Output
+
+1. **Migration plan**: a list of affected files and the change needed in each, before any edits
+2. **Progress log**: after each batch, the files migrated and the lint/test result
+3. **Manual steps**: anything the user must do themselves
+4. **Summary**: what changed, what still uses the old pattern, and how to roll back
