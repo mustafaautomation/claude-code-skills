@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-Skills-FF6B35.svg)](https://docs.anthropic.com/en/docs/claude-code)
 
-Collection of custom Claude Code skills for enterprise development teams. Drop-in skills that give Claude Code superpowers for code review, test generation, documentation, migrations, and more.
+Collection of custom Claude Code skills for code review, test generation, documentation, migrations, dependency audits and SQL help. Each skill is a Markdown instruction file under `skills/`.
 
 ---
 
@@ -18,6 +18,8 @@ Collection of custom Claude Code skills for enterprise development teams. Drop-i
 | **Migration Assistant** | `/migration-assistant` | Migrate between frameworks (JS→TS, Jest→Vitest, CJS→ESM, etc.) |
 | **Dependency Auditor** | `/dependency-auditor` | Audit deps for CVEs, outdated packages, license issues |
 | **DB Query Helper** | `/db-query-helper` | Write, optimize, and explain SQL from your schema |
+| **API Contract Checker** | `/api-contract-checker` | Compare API routes in code with the OpenAPI/Swagger spec |
+| **CI Failure Analyzer** | `/ci-failure-analyzer` | Read failing GitHub Actions logs and suggest the likely cause and fix |
 
 ---
 
