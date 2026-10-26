@@ -99,10 +99,15 @@ claude-code-skills/
 │   │   └── skill.md              # Framework/language migration helper
 │   ├── dependency-auditor/
 │   │   └── skill.md              # Security audit + license check
-│   └── db-query-helper/
-│       └── skill.md              # SQL write/optimize/explain
+│   ├── db-query-helper/
+│   │   └── skill.md              # SQL write/optimize/explain
+│   ├── api-contract-checker/
+│   │   └── skill.md              # Code routes vs OpenAPI/Swagger spec
+│   └── ci-failure-analyzer/
+│       └── skill.md              # Failing GitHub Actions log analysis
+├── scripts/validate.sh            # Structural checks run by CI
 ├── INSTALL.md                     # Installation guide
-└── .github/workflows/validate.yml # CI: validates all skill files
+└── .github/workflows/validate.yml # CI: runs scripts/validate.sh
 ```
 
 ---
@@ -117,6 +122,10 @@ claude-code-skills/
 | Google "how to migrate from X to Y" | `/migration-assistant` — step-by-step with verification |
 
 Skills encode **organizational knowledge** so every developer on the team gets the same quality AI assistance.
+
+## Validation
+
+CI runs `scripts/validate.sh`, a structural check only: each skill folder must contain a non-empty `skill.md`. Missing title, `## Process` or `## Output` sections, or files under 200 characters, are printed as warnings and do not fail the build. It does not test the skills' behaviour inside Claude Code.
 
 ---
 
